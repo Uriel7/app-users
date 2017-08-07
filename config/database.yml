@@ -67,4 +67,4 @@ production:
   <<: *default
   database: appusers_production
   username: appusers
-  password: <%= ENV['appusers_password'] %>
+  password: <%= ENV['APPUSERS_PASSWORD'] %>
