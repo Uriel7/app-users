@@ -1,0 +1,31 @@
+.container
+  .row
+    .col-lg-12
+      .margin-tb
+        %h3
+          List of Users
+        .pull-right
+          = link_to new_user_path, remote: true, class: 'btn btn-success' do
+            %i.fa.fa-plus
+            Add User
+
+      %table.table.table-hover.datatable#users
+        %thead
+          %tr
+            %th Image
+            %th Name
+            %th Surnames
+            %th Phone
+            %th Address
+            %th Actions
+        %tbody
+          = render @users
+:javascript
+  function printpage(){
+    console.log('cliekd');
+    $("#image").hide();
+    $("#fin").html('Fin:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+    window.print()
+    $("#image").show();
+    $("#fin").html('Fin:');
+  }

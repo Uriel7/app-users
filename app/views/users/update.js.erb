@@ -1,0 +1,3 @@
+$("<%= j render @user %>")
+.replaceAll("#user_<%= @user.id %>")
+.effect('highlight', null, 2000);

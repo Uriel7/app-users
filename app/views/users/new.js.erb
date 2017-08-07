@@ -1,0 +1,69 @@
+// Dialog setup
+dialog_form = $("<%= j render 'form' %>").dialog({
+  autoOpen: false,
+  width: 520,
+  modal: true,
+  close: function(){ dialog_form.dialog('destroy')}
+});
+
+// Close dialog
+$('#dialog_form .btn-cancel').click(function(){
+  dialog_form.dialog('close');
+  return false;
+});
+
+$('#dialog_form form .btn-success').click(function(){
+  console.log('cliekc');
+  //$(this).removeAttr("data-disable-with");
+});
+
+// Client side validation
+$('#dialog-form form').on('ajax:before', function(e, xhr, status, error){
+  image_formats = ['JPEG', 'jpeg', 'GIF', 'gif', 'TIFF', 'tiff', 'PNG', 'png', 'JPG', 'jpg'];
+  f = $(e.currentTarget);
+  name = f.find('#user_name').val();
+  surnames = f.find('#user_surnames').val();
+  phone = f.find('#user_phone').val();
+  address = f.find('#user_address').val();
+  image = f.find('#user_image').val();
+  format = image.split('.').pop();
+
+  if(name == ''){
+    $('#name_error').html('Name is required');
+    return false;
+  }
+
+  if(surnames == ''){
+    $('#surnames_error').html('Surnames is required');
+    return false;
+  }
+
+  if(phone == ''){
+    $('#phone_error').html('Phone is required');
+    return false;
+  }
+
+  if(address == ''){
+    $('#address_error').html('Address is required');
+    return false;
+  }
+
+  if(image != ''){
+    if(!image_formats.includes(format)){
+      $('#image_error').html('The file is not a image');
+      return false;
+    }
+  }
+  
+});
+
+$('#dialog-form form').on('ajax:success', function(e, xhr, status, error){
+  dialog_form.dialog('close');
+});
+
+$('dialog-form form').on('ajax:error', function(e, xhr, status, error){
+  alert('Error to save user');
+});
+
+// Open dialog
+dialog_form.dialog('open');

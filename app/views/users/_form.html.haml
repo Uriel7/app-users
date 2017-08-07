@@ -1,0 +1,30 @@
+#dialog-form.modal.inmodal
+  .modal-dialog
+    .modal-content
+      / .modal-header
+      /   %button.close{"aria-hidden" => "true", "data-dismiss"=>"modal", type: "button"} x
+      .modal-body
+        = form_for @user, remote: true do |f|
+          .form-group
+            = f.label :image
+            = f.file_field :image, class: 'form-control'
+            %span.help-block.with-errors#image_error
+          .form-group
+            = f.label :name
+            = f.text_field :name, class: 'form-control', placeholder: 'Name'
+            %span.help-block.with-errors#name_error
+          .form-group
+            = f.label :surnames
+            = f.text_field :surnames, class: 'form-control', placeholder: 'Surnames'
+            %span.help-block.with-errors#surnames_error
+          .form-group
+            = f.label :phone
+            = f.text_field :phone, class: 'form-control', placeholder: 'Phone'
+            %span.help-block.with-errors#phone_error
+          .form-group
+            = f.label :address
+            = f.text_field :address, class: 'form-control', placeholder: 'Address'
+            %span.help-block.with-errors#address_error
+          .form-group
+            %button{type:'submit', class: 'btn btn-success'} Save
+            = link_to 'Cancel', '#', class: 'btn btn-danger btn-cancel'
